@@ -16,3 +16,4 @@ To-do:
 * Add units toggle so users can choose which one they want to use, and save this
   in the browser session. Should override country detection function.
 * Add additional background images to match current conditions
+* Make background images mobile friendly
