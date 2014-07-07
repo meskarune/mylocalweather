@@ -1,7 +1,7 @@
 My local weather
 ==============
 
-Display local weather data in a web page using HTML5 geo-location
+Display local weather data in a web page using HTML5 geo-location and [open weather map](http://openweathermap.org/).
 
 Preview:
 
