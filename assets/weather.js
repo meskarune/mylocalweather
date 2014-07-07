@@ -1,4 +1,3 @@
-var data_timestamp=Math.round(new Date().getTime() / 1000);
 $(function geolocation (){
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(getcoordinates,showError);
@@ -11,10 +10,10 @@ function getcoordinates(position) {
     var lat=position.coords.latitude;
     var long=position.coords.longitude;
     //if ( window.navigator.language != "en-US" ) {
-    //    units = "imperial";
+    //    do stuff
     //}
 	//else {
-	//    units = "metric";
+	//    do stuff
 	//}
     var CurrentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=imperial";
     var DailyForecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&units=imperial&cnt=1";
@@ -36,6 +35,7 @@ function showError(error) {
             break;
     }
 }
+var data_timestamp=Math.round(new Date().getTime() / 1000);
 function getWeather(data_url, forecast_url) {
     $.ajax ({
         url: data_url,
@@ -70,12 +70,12 @@ function displayData() {
         if ( localStorage.getItem('timestamp') > data_timestamp - 1800){
             var data = JSON.parse(localStorage.WeatherCache);
             var forecast = JSON.parse(localStorage.ForecastCache);
+
             document.body.style.background = "url('assets/backgrounds/" +data.weather[0].icon+ ".jpg') no-repeat fixed 50% 50%";
             document.body.style.backgroundSize = "cover";
+
             $("#weather").html('<h2>' + data.name + '</h2><img class="icon" src="//meskarune.com/demos/weather/assets/icons/'+data.weather[0].icon+'.png"><span id="temp">'+ data.main.temp + ' </span><span id="units">&deg;F</span><p id="description">'+ data.weather[0].description + '</p><p><span id="humidity">'+ data.main.humidity + '% humidity</span>&nbsp;&nbsp;&nbsp;&nbsp;'+Math.round(data.wind.speed)+ 'mph wind</p>');
-            //$.each(forecast.list, function(){
-              $("#forecast").html('<p id="daily">Today\'s Forecast: '+forecast.list[0].weather[0].main+'</p><p>max: '+Math.round(forecast.list[0].temp.max)+'&deg; &nbsp;&nbsp;&nbsp;&nbsp;min: ' +Math.round(forecast.list[0].temp.min)+'&deg;</p>');
-           // });
+            $("#forecast").html('<p id="daily">Today\'s Forecast: '+forecast.list[0].weather[0].main+'</p><p>max: '+Math.round(forecast.list[0].temp.max)+'&deg; &nbsp;&nbsp;&nbsp;&nbsp;min: ' +Math.round(forecast.list[0].temp.min)+'&deg;</p>');
         }
         else {
             geolocation ();
