@@ -1,0 +1,35 @@
+body {
+    font-family: "Helvetica Neue", HelveticaNeue, TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arimo, Helvetica, Arial, sans-serif;
+    background: #5e92c4;
+}
+article {
+    text-align: center;
+    background: rgba(225,225,225,.4);
+    width: 300px;
+    margin: 2em auto;
+    padding: 1em;
+}
+h2 {
+	margin-bottom: 1.5em;
+}
+p {
+	font-size: 1.3em;
+}
+#weather {
+
+}
+.icon {
+    display: inline;
+    vertical-align: middle;
+    margin-top: -1.5em;
+}
+#temp {
+    font-size: 3em;
+}
+#units {
+    font-size: 2em;
+    vertical-align: super;
+}
+#description, #daily {
+    font-weight: bold;
+}
