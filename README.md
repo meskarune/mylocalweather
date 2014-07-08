@@ -18,3 +18,8 @@ To-do:
 * ~~Reload the data when units are toggled.~~
 * Add additional background images to match current conditions
 * Make background images mobile friendly
+
+Special Thanks to Long Yin for the great weather icon theme he released:
+http://xiao4.deviantart.com/art/tick-weather-icons-96294478
+
+Background images are all creative commons from http://pixabay.com
