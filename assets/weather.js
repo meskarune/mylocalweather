@@ -1,3 +1,43 @@
+$(function SetUnits () {
+    switch (localStorage.getItem("Units")) {
+        case null:
+            if (window.navigator.language == "en-US") {
+                localStorage.Units = "imperial";
+                $("#far").removeClass("inactive");
+                $("#far").addClass("active");
+            }
+            else {
+                localStorage.Units = "metric";
+                $("#cel").removeClass("inactive");
+                $("#cel").addClass("active");
+            }
+            break;
+        case "metric":
+            $("#cel").removeClass("inactive");
+            $("#cel").addClass("active");
+            break;
+        case "imperial":
+            $("#far").removeClass("inactive");
+            $("#far").addClass("active");
+            break;
+    }
+});
+function SetCelsius(){
+    localStorage.Units = "metric";
+    $("#cel").removeClass("inactive");
+    $("#cel").addClass("active");
+    $("#far").removeClass("active");
+    $("#far").addClass("inactive");
+    //geolocation ();
+}
+function SetFahrenheit() {
+    localStorage.Units = "imperial";
+    $("#far").removeClass("inactive");
+    $("#far").addClass("active");
+    $("#cel").removeClass("active");
+    $("#cel").addClass("inactive");
+    //geolocation ();
+}
 $(function geolocation (){
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(getcoordinates,showError);
@@ -9,15 +49,15 @@ $(function geolocation (){
 function getcoordinates(position) {
     var lat=position.coords.latitude;
     var long=position.coords.longitude;
-    //if ( window.navigator.language != "en-US" ) {
-    //    do stuff
-    //}
-	//else {
-	//    do stuff
-	//}
-    var CurrentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=imperial";
-    var DailyForecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&units=imperial&cnt=1";
-    getWeather(CurrentWeatherURL, DailyForecastURL);
+    var units=localStorage.getItem("Units");
+    var CurrentWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units="+units;
+    var DailyForecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?lat="+lat+"&lon="+long+"&units="+units+"&cnt=1";
+    if (units == "imperial") {
+        getWeather(CurrentWeatherURL, DailyForecastURL, "F", "mph")
+    }
+    else {
+        getWeather(CurrentWeatherURL, DailyForecastURL, "C", "m\/s")
+    }
 }
 function showError(error) {
     switch(error.code) {
@@ -36,7 +76,7 @@ function showError(error) {
     }
 }
 var data_timestamp=Math.round(new Date().getTime() / 1000);
-function getWeather(data_url, forecast_url) {
+function getWeather(data_url, forecast_url, temp, wind) {
     $.ajax ({
         url: data_url,
         type: 'GET',
@@ -56,7 +96,7 @@ function getWeather(data_url, forecast_url) {
         datatype: "jsonp",
         success: function(data) {
             localStorage.ForecastCache = JSON.stringify(data);
-            displayData();
+            displayData(temp, wind);
         },
         error: function (errorData) {
             $("#forecast").html("Error retrieving forecast data :: "+ errorData.status);
@@ -64,18 +104,16 @@ function getWeather(data_url, forecast_url) {
     });
     localStorage.timestamp = data_timestamp;
 };
-function displayData() {
+function displayData(temp_units, wind_units) {
     try {
         // If the timestamp is newer  than 30 minutes, parse data from cache
         if ( localStorage.getItem('timestamp') > data_timestamp - 1800){
             var data = JSON.parse(localStorage.WeatherCache);
             var forecast = JSON.parse(localStorage.ForecastCache);
-
             document.body.style.background = "url('assets/backgrounds/" +data.weather[0].icon+ ".jpg') no-repeat fixed 50% 50%";
             document.body.style.backgroundSize = "cover";
-
-            $("#weather").html('<h2>' + data.name + '</h2><img class="icon" src="assets/icons/'+data.weather[0].icon+'.png"><span id="temp">'+ data.main.temp + ' </span><span id="units">&deg;F</span><p id="description">'+ data.weather[0].description + '</p><p><span id="humidity">'+ data.main.humidity + '% humidity</span>&nbsp;&nbsp;&nbsp;&nbsp;'+Math.round(data.wind.speed)+ 'mph wind</p>');
-            $("#forecast").html('<p id="daily">Today\'s Forecast: '+forecast.list[0].weather[0].main+'</p><p>max: '+Math.round(forecast.list[0].temp.max)+'&deg; &nbsp;&nbsp;&nbsp;&nbsp;min: ' +Math.round(forecast.list[0].temp.min)+'&deg;</p>');
+            $("#weather").html('<h2>' + data.name + '</h2><img class="icon" src="assets/icons/'+data.weather[0].icon+'.png"><span id="temp">'+ data.main.temp + ' </span><span id="units">&deg;'+temp_units+'</span><p id="description">'+ data.weather[0].description + '</p><p><span id="humidity">'+ data.main.humidity + '% humidity</span>&nbsp;&nbsp;&nbsp;&nbsp;'+ Math.round(data.wind.speed) + wind_units +' wind</p>');
+            $("#forecast").html('<p id="daily">Today\'s Forecast: '+forecast.list[0].weather[0].main+'</p><p>max: '+Math.round(forecast.list[0].temp.max)+'&deg;'+temp_units+' &nbsp;&nbsp;&nbsp;&nbsp;min: ' +Math.round(forecast.list[0].temp.min)+'&deg;'+temp_units+'</p>');
         }
         else {
             geolocation ();

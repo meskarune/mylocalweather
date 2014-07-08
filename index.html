@@ -13,12 +13,16 @@
         <![endif]-->
     </head>
     <body>
+        <form id="toggle">
+            <button type="button" id="cel" class="inactive" onclick="SetCelsius();">&deg;C</button>
+            <button type="button" id="far" class="inactive" onclick="SetFahrenheit();">&deg;F</button>
+        </form>
         <article>
         <section id="weather">
             <img alt="loading" id="spinner" src="assets/spinner.gif">
         </section>
         <section id="forecast">
-            
+            <noscript>This application requires JavaScript to function. Please enable scripts in your browser.</noscript>
         </section>
         </article>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
