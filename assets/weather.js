@@ -28,7 +28,7 @@ function SetCelsius(){
     $("#cel").addClass("active");
     $("#far").removeClass("active");
     $("#far").addClass("inactive");
-    //geolocation ();
+    location.reload();
 }
 function SetFahrenheit() {
     localStorage.Units = "imperial";
@@ -36,7 +36,7 @@ function SetFahrenheit() {
     $("#far").addClass("active");
     $("#cel").removeClass("active");
     $("#cel").addClass("inactive");
-    //geolocation ();
+    location.reload();
 }
 $(function geolocation (){
     if (navigator.geolocation){
