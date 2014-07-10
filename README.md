@@ -16,7 +16,7 @@ To-do:
 * ~~Add units toggle so users can choose which one they want to use, and save this
   in the browser session. Should override country detection function.~~
 * ~~Reload the data when units are toggled.~~
-* Add additional background images to match current conditions
+* ~~Add additional background images to match current conditions~~
 * Make background images mobile friendly
 
 Special Thanks to Long Yin for the great weather icon theme he released:
