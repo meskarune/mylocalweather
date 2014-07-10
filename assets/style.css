@@ -1,20 +1,19 @@
 /* Global Settings */
 body {
     font-family: "Helvetica Neue", HelveticaNeue, TeXGyreHeros, FreeSans, "Nimbus Sans L", "Liberation Sans", Arimo, Helvetica, Arial, sans-serif;
-    background: #5e92c4;
 }
 article {
     text-align: center;
-    background: rgba(225,225,225,.4);
+    background: rgba(255,255,255,.4);
     width: 300px;
     margin: 2em auto;
     padding: 1em;
 }
 h2 {
-	margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 p {
-	font-size: 1.3em;
+    font-size: 1.3em;
 }
 /* Units Toggle */
 #toggle {
