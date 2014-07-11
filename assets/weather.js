@@ -3,39 +3,25 @@ $(function SetUnits () {
         case null:
             if (window.navigator.language == "en-US") {
                 localStorage.Units = "imperial";
-                $("#far").removeClass("inactive");
-                $("#far").addClass("active");
+                $("#imperial").addClass("active");
             }
             else {
                 localStorage.Units = "metric";
-                $("#cel").removeClass("inactive");
-                $("#cel").addClass("active");
+                $("metric").addClass("active");
             }
             break;
         case "metric":
-            $("#cel").removeClass("inactive");
-            $("#cel").addClass("active");
+            $("#metric").addClass("active");
             break;
         case "imperial":
-            $("#far").removeClass("inactive");
-            $("#far").addClass("active");
+            $("#imperial").addClass("active");
             break;
     }
 });
-function SetCelsius(){
-    localStorage.Units = "metric";
-    $("#cel").removeClass("inactive");
-    $("#cel").addClass("active");
-    $("#far").removeClass("active");
-    $("#far").addClass("inactive");
-    location.reload();
-}
-function SetFahrenheit() {
-    localStorage.Units = "imperial";
-    $("#far").removeClass("inactive");
-    $("#far").addClass("active");
-    $("#cel").removeClass("active");
-    $("#cel").addClass("inactive");
+function SetScale(units) {
+    localStorage.Units = units;
+    $(".active").removeClass("active");
+    $("#"+units+"").addClass("active");
     location.reload();
 }
 $(function geolocation (){
