@@ -2,7 +2,6 @@ function SetScale(units) {
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
     localStorage.Units = units;
-    location.reload();
 }
 $(function SetUnits () {
     var system = localStorage.getItem("Units");
