@@ -1,30 +1,18 @@
-$(function SetUnits () {
-    switch (localStorage.getItem("Units")) {
-        case null:
-            if (window.navigator.language == "en-US") {
-                localStorage.Units = "imperial";
-                $("#imperial").addClass("active");
-            }
-            else {
-                localStorage.Units = "metric";
-                $("metric").addClass("active");
-            }
-            break;
-        case "metric":
-            $("#metric").addClass("active");
-            break;
-        case "imperial":
-            $("#imperial").addClass("active");
-            break;
-    }
-});
 function SetScale(units) {
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
     localStorage.Units = units;
     location.reload();
 }
-$(function geolocation (){
+$(function SetUnits () {
+    var system = localStorage.getItem("Units");
+    if (system != "metric" && system != "imperial") {
+        system = window.navigator.language == "en-US" ? "imperial" : "metric";
+    }
+    SetScale(system);
+    return system;
+});
+$(function geolocation () {
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(getcoordinates,showError);
     }
