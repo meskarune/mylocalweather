@@ -21,7 +21,7 @@ $(function SetUnits () {
 function SetScale(units) {
     localStorage.Units = units;
     $(".active").removeClass("active");
-    $("#"+units+"").addClass("active");
+    $("#" +units).addClass("active");
     location.reload();
 }
 $(function geolocation (){
