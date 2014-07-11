@@ -19,9 +19,9 @@ $(function SetUnits () {
     }
 });
 function SetScale(units) {
-    localStorage.Units = units;
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
+    localStorage.Units = units;
     location.reload();
 }
 $(function geolocation (){
@@ -46,20 +46,16 @@ function getcoordinates(position) {
     }
 }
 function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            $("#weather").html("User denied the request for Geolocation.");
-            break;
-        case error.POSITION_UNAVAILABLE:
-            $("#weather").html("Location information is unavailable.");
-            break;
-        case error.TIMEOUT:
-            $("#weather").html("The request to get user location timed out.");
-            break;
-        case error.UNKNOWN_ERROR:
-            $("#weather").html("An unknown error occurred.");
-            break;
-    }
+    var errorMessages = {
+        PERMISSION_DENIED    : "User denied the request for geolocation.",
+        POSITION_UNAVAILABLE : "Location information is unavailable.",
+        TIMEOUT              : "The request to get user location timed out.",
+        UNKNOWN_ERROR        : "An unknown error occurred."
+    };
+    $("#weather").html(errorMessages.UNKNOWN_ERROR);
+    for (var msg in errorMessages)
+        if (error[msg] === error.code)
+            $("#weather").html(errorMessages[msg]);
 }
 var data_timestamp=Math.round(new Date().getTime() / 1000);
 function getWeather(data_url, forecast_url, temp, wind) {
