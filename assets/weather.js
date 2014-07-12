@@ -8,7 +8,7 @@ $(function SetUnits () {
     if (system != "metric" && system != "imperial") {
         system = window.navigator.language == "en-US" ? "imperial" : "metric";
     }
-    SetScale(system);
+    $("#" +system).addClass("active");
     return system;
 });
 $(function geolocation () {
