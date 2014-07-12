@@ -1,14 +1,17 @@
-function SetScale(units) {
+function SetUnits(units) {
+    localStorage.Units = units;
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
-    localStorage.Units = units;
 }
-$(function SetUnits () {
+$("#imperial, #metric").on("click", function() {
+    SetUnits(this.id);
+});
+$(function DefaultUnits () {
     var system = localStorage.getItem("Units");
     if (system != "metric" && system != "imperial") {
         system = window.navigator.language == "en-US" ? "imperial" : "metric";
     }
-    $("#" +system).addClass("active");
+    SetUnits(system);
     return system;
 });
 $(function geolocation () {
