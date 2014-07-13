@@ -3,18 +3,21 @@ function SetUnits(units) {
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
 }
-$("#imperial, #metric").on("click", function() {
-    SetUnits(this.id);
-    handleCache();
+$(function() {
+    $("#imperial, #metric").on("click", function() {
+        SetUnits(this.id);
+        handleCache();
+    });
+    DefaultUnits ();
+    geolocation ();
 });
-$(function DefaultUnits () {
+function DefaultUnits () {
     var system = localStorage.getItem("Units");
     if (system != "metric" && system != "imperial") {
         system = window.navigator.language == "en-US" ? "imperial" : "metric";
     }
     SetUnits(system);
-    geolocation ();
-});
+}
 function geolocation () {
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(getcoordinates,showError);
@@ -64,6 +67,7 @@ function handleCache() {
     }
     else {
         localStorage.timestamp = data_timestamp;
+        geolocation ();
     }
 }
 function localize() {
