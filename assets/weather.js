@@ -5,7 +5,6 @@ function SetUnits(units) {
 }
 $("#imperial, #metric").on("click", function() {
     SetUnits(this.id);
-    handleCache();
 });
 $(function DefaultUnits () {
     var system = localStorage.getItem("Units");
@@ -13,16 +12,16 @@ $(function DefaultUnits () {
         system = window.navigator.language == "en-US" ? "imperial" : "metric";
     }
     SetUnits(system);
-    geolocation ();
+    return system;
 });
-function geolocation () {
+$(function geolocation () {
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(getcoordinates,showError);
     }
     else {
         $("#weather").html("Geolocation is not supported by this browser.");
     }
-}
+});
 function getcoordinates(position) {
     var lat=position.coords.latitude;
     var long=position.coords.longitude;
@@ -64,7 +63,7 @@ function handleCache() {
     }
     else {
         localStorage.timestamp = data_timestamp;
-        geolocation ();
+        geolocation();
     }
 }
 function localize() {
