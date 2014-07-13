@@ -5,6 +5,7 @@ function SetUnits(units) {
 }
 $("#imperial, #metric").on("click", function() {
     SetUnits(this.id);
+    handleCache();
 });
 $(function DefaultUnits () {
     var system = localStorage.getItem("Units");
