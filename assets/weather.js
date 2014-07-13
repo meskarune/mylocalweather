@@ -13,6 +13,7 @@ $(function DefaultUnits () {
         system = window.navigator.language == "en-US" ? "imperial" : "metric";
     }
     SetUnits(system);
+    geolocation ();
 });
 function geolocation () {
     if (navigator.geolocation){
@@ -63,7 +64,6 @@ function handleCache() {
     }
     else {
         localStorage.timestamp = data_timestamp;
-        geolocation ();
     }
 }
 function localize() {
