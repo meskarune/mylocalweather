@@ -2,11 +2,11 @@ function SetUnits(units) {
     localStorage.Units = units;
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
-    geolocation();
 }
 $(function() {
     $("#imperial, #metric").on("click", function() {
         SetUnits(this.id);
+        handleCache();
     });
     DefaultUnits ();
 });
