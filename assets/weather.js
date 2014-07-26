@@ -71,7 +71,7 @@ function handleCache() {
     }
     else {
         localStorage.timestamp = data_timestamp;
-        geolocation ();
+        //geolocation ();
     }
 }
 function localize() {
