@@ -2,14 +2,18 @@ function SetUnits(units) {
     localStorage.Units = units;
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
+    if (localStorage.getItem("cache-weather-"+units) === null) {
+        geolocation();
+    }
+    else {
+        handleCache();
+    }
 }
 $(function() {
     $("#imperial, #metric").on("click", function() {
         SetUnits(this.id);
-        handleCache();
     });
     DefaultUnits ();
-    geolocation ();
 });
 function DefaultUnits () {
     var system = localStorage.getItem("Units");
@@ -67,6 +71,7 @@ function handleCache() {
     }
     else {
         localStorage.timestamp = data_timestamp;
+        geolocation ();
     }
 }
 function localize() {
