@@ -2,12 +2,7 @@ function SetUnits(units) {
     localStorage.Units = units;
     $(".active").removeClass("active");
     $("#" +units).addClass("active");
-    if (localStorage.getItem("cache-weather-"+units) === null) {
-        geolocation();
-    }
-    else {
-        handleCache();
-    }
+    geolocation();
 }
 $(function() {
     $("#imperial, #metric").on("click", function() {
