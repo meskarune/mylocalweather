@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Local Weather</title>
-        <meta description content="Get your Local weather using geolocation.">
-        <meta name=viewport content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
-        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700">
-        <link rel="stylesheet" type="text/css" href="assets/style.css">
-        <!--[if lt IE 9]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <form id="toggle">
-            <button type="button" id="metric">&deg;C</button>
-            <button type="button" id="imperial">&deg;F</button>
-        </form>
-        <article>
-        <section id="weather">
-            <img alt="loading" id="spinner" src="assets/spinner.gif">
-        </section>
-        <section id="forecast">
-            <noscript>This application requires JavaScript to function. Please enable scripts in your browser.</noscript>
-        </section>
-        </article>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="assets/weather.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <title>Local Weather</title>
+    <meta description content="Get your local weather using geolocation">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+  </head>
+  <body id="content">
+    <form id="toggle">
+      <button type="button" id="metric" onclick="setunits('metric')">&deg;C</button>
+      <button type="button" id="imperial" onclick="setunits('imperial')">&deg;F</button>
+    </form>
+    <article>
+      <section id="weather">
+        <img alt="loading" id="spinner" src="assets/spinner.gif">
+      </section>
+      <section id="forecast">
+        <noscript>This application requires JavaScript to function. Please enable scripts in your browser.</noscript>
+      </section>
+    </article>
+    <script src="assets/weather.js"></script>
+  </body>
 </html>
