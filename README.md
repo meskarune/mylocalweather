@@ -3,11 +3,14 @@ My local weather
 
 Display local weather data in a web page using HTML5 geo-location and [open weather map](http://openweathermap.org/).
 
+You will need an API key. To use the app you need to add your own API key to the
+end of the url.
+
 Preview:
 
 ![Website preview](https://raw.githubusercontent.com/meskarune/mylocalweather/gh-pages/mylocalweather.png)
 
-Live site: http://meskarune.github.io/mylocalweather/
+Live site: http://meskarune.github.io/mylocalweather/?key=
 
 To-do:
 
